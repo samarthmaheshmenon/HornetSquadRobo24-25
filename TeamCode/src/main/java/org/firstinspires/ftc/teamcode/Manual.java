@@ -71,12 +71,12 @@ public class Manual  extends LinearOpMode{
             }
 */
 
-            if(gamepad2.right_bumper){
+            if(gamepad2.right_trigger > 0){
                 //robot.goDiagonal(1);
-                robot.goStrafe(-1);
+                robot.goStrafe(gamepad2.right_trigger * -1);
             }
-            else if (gamepad2.left_bumper){
-                robot.goStrafe(1);
+            else if (gamepad2.left_trigger > 0){
+                robot.goStrafe(gamepad2.left_trigger * 1);
 
             }
 
