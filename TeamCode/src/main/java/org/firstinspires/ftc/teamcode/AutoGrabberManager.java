@@ -34,6 +34,11 @@ public class AutoGrabberManager {
         double grabberPosition = Open ? GRABBER_MAX : GRABBER_MIN;
         hornetRobo.Grabber.setPosition(grabberPosition);
     }
+
+    public void SetGrabberToPosition(double Position){
+        hornetRobo.Grabber.setPosition(Range.clip(Position, GRABBER_MIN, GRABBER_MAX));
+    }
+
 }
 
 

@@ -61,7 +61,7 @@ public class AutoViperSlideManager {
 
     public void SetTargetPosition (double DistanceInInches){
 
-        int targetPosition = getEncodedDistance(DistanceInInches);
+        int targetPosition = GetEncodedDistance(DistanceInInches);
         hornetRobo.ViperSlideOne.setTargetPosition(targetPosition);
         hornetRobo.ViperSlideTwo.setTargetPosition(targetPosition);
     }
@@ -71,7 +71,7 @@ public class AutoViperSlideManager {
         hornetRobo.ViperSlideTwo.setPower(Power);
     }
 
-    public int getEncodedDistance(double DistanceInInches)
+    public int GetEncodedDistance(double DistanceInInches)
     {
         int encodedDistance = (int)(DistanceInInches * COUNTS_PER_INCH);
         return encodedDistance;

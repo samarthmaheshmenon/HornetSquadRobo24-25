@@ -20,6 +20,13 @@ public class AutoDriveManager {
         RIGHT
     }
 
+    public enum MotorPosition {
+        LEFT_FRONT,
+        LEFT_BACK,
+        RIGHT_FRONT,
+        RIGHT_BACK
+    }
+
     /************Encoder parameters*****************/
     // Calculate the COUNTS_PER_INCH for your specific drive train.
     // Go to your motor vendor website to determine your motor's COUNTS_PER_MOTOR_REV
@@ -124,6 +131,64 @@ public class AutoDriveManager {
         hornetRobo.LeftBackMotor.setPower(0);
     }
 
+    public int GetCurrentPosition(MotorPosition Position) {
+
+        int currentPosition = -1;
+        switch (Position) {
+            case LEFT_FRONT: {
+                currentPosition = hornetRobo.LeftFrontMotor.getCurrentPosition();
+                break;
+            }
+            case RIGHT_FRONT: {
+                currentPosition = hornetRobo.RightFrontMotor.getCurrentPosition();
+                break;
+            }
+            case LEFT_BACK: {
+                currentPosition = hornetRobo.LeftBackMotor.getCurrentPosition();
+                break;
+            }
+            case RIGHT_BACK: {
+                currentPosition = hornetRobo.RightBackMotor.getCurrentPosition();
+                break;
+
+            }
+            default: {
+                break;
+            }
+        }
+        return currentPosition;
+
+    }
+
+    public boolean IsMotorBusy(MotorPosition Position) {
+
+        boolean isBusy = false;
+        switch (Position) {
+            case LEFT_FRONT: {
+                isBusy = hornetRobo.LeftFrontMotor.isBusy();
+                break;
+            }
+            case RIGHT_FRONT: {
+                isBusy = hornetRobo.RightFrontMotor.isBusy();
+                break;
+            }
+            case LEFT_BACK: {
+                isBusy = hornetRobo.LeftBackMotor.isBusy();
+                break;
+            }
+            case RIGHT_BACK: {
+                isBusy = hornetRobo.RightBackMotor.isBusy();
+                break;
+
+            }
+            default: {
+                break;
+            }
+        }
+        return isBusy;
+
+    }
+
     public void SetTargetPosition (DriveDirection DirectionToMove, double Distance){
         int encodedDistance = getEncodedDistance(Distance);
 
@@ -187,6 +252,18 @@ public class AutoDriveManager {
         SetDrivePower(Speed, Speed);
         SetAllMotorsMode(DcMotor.RunMode.RUN_TO_POSITION);
         WaitForMotorToDoTheTask();
+    }
+
+    public void SetPowerToGoDiagonal(double Num) {
+        hornetRobo.RightBackMotor.setPower(Num);
+        hornetRobo.LeftFrontMotor.setPower(Num);
+    }
+
+    public void SetPowerToStrafe(double Num) {
+        hornetRobo.RightBackMotor.setPower(-Num);
+        hornetRobo.LeftBackMotor.setPower(-Num);
+        hornetRobo.RightFrontMotor.setPower(Num);
+        hornetRobo.LeftFrontMotor.setPower(Num);
     }
 
     public void SetTargetPositionToStrafe (DriveDirection DirectionToMove, double StrafeDistance){

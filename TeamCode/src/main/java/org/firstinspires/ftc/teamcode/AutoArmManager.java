@@ -46,9 +46,19 @@ public class AutoArmManager {
         }
     }
 
-    public void MoveArmToPosition(double position){
-        hornetRobo.ArmOne.setPosition(Range.clip(position, ARM_MIN, ARM_MAX));
-        hornetRobo.ArmTwo.setPosition(Range.clip(position, ARM_MIN, ARM_MAX));
+    public void MoveArmToPosition(double Position){
+        hornetRobo.ArmOne.setPosition(Range.clip(Position, ARM_MIN, ARM_MAX));
+        hornetRobo.ArmTwo.setPosition(Range.clip(Position, ARM_MIN, ARM_MAX));
+    }
+
+    public void MoveArmToPosition(double Position, double ArmMin, double ArmMax){
+        hornetRobo.ArmOne.setPosition(Range.clip(Position, ArmMin, ArmMax));
+        hornetRobo.ArmTwo.setPosition(Range.clip(Position, ArmMin, ArmMax));
+    }
+    public double GetArmServoPosition(int armNumber){
+        if (armNumber == 1)
+            return hornetRobo.ArmOne.getPosition();
+        return hornetRobo.ArmTwo.getPosition();
     }
 
 }

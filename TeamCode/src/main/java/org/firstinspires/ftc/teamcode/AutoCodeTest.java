@@ -35,6 +35,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 
 @TeleOp(name="Auto Code Test", group="")
 public class AutoCodeTest extends LinearOpMode {
@@ -76,6 +78,8 @@ public class AutoCodeTest extends LinearOpMode {
         //Test strafe
         //TestStrafeRoboUsingEncoders();
 
+        TestLogManager();
+
         //Test turn
         //TestRotate180();
 
@@ -105,10 +109,10 @@ public class AutoCodeTest extends LinearOpMode {
         //Test viper slide
         //TestViperSlide();
         //TestRotate180();
-        //TestViperSlideArmGrabber();
+        TestViperSlideArmGrabber();
 
         //TestViperSlideUpOnButtonClick(); //test encoder
-        TestViperSlideWithBrake(); // test specimen hanging
+        //TestViperSlideWithBrake(); // test specimen hanging
     }
 
     public void TestDriveMotorEncodedMove(DcMotor Motor) {
@@ -147,7 +151,7 @@ public class AutoCodeTest extends LinearOpMode {
     }
 
     public void TestGoForwardRoboUsingEncoders(){
-        AutoDriveManager driveManager = new AutoDriveManager(this, hornetRobo);
+        //AutoDriveManager driveManager = new AutoDriveManager(this, hornetRobo);
 
         if (opModeIsActive()) {
 
@@ -157,7 +161,7 @@ public class AutoCodeTest extends LinearOpMode {
                 telemetry.addData("go forward", "");
                 telemetry.update();
 
-                driveManager.MoveStraightToPosition(AutoDriveManager.DriveDirection.FORWARD, DRIVE_SPEED, 8);
+                driveManager.MoveStraightToPosition(AutoDriveManager.DriveDirection.BACKWARD, DRIVE_SPEED, 8);
 
                 telemetry.addData("go forward", "");
                 telemetry.update();
@@ -194,6 +198,11 @@ public class AutoCodeTest extends LinearOpMode {
         }
     }
 
+    public void TestLogManager(){
+        LogManager logManager = new LogManager(this.telemetry, "AutoCodeTest");
+        logManager.WriteLog("Test1", "Test2");
+        logManager.WriteLog("Test3", "Test4");
+    }
     public void TestGrabberOpenAndClose() {
         AutoGrabberManager grabberManager = new AutoGrabberManager(this, hornetRobo);
 
@@ -292,8 +301,10 @@ public class AutoCodeTest extends LinearOpMode {
                 sleep(500);
                 armManager.SetDirection(AutoDriveManager.DriveDirection.BACKWARD);
                 armManager.MoveArmToPosition(0.5);
+                vsManager.SetDirection(AutoDriveManager.DriveDirection.BACKWARD);
+                vsManager.SetPower(0.5);
                 sleep(100);
-                vsManager.SetPower(0.03);
+                //vsManager.SetDirection(AutoDriveManager.DriveDirection.BACKWARD);
                 //vsManager.SetDirection(AutoDriveManager.DriveDirection.BACKWARD);
                 sleep(3000);
                 telemetry.addData("VS test done", "");
