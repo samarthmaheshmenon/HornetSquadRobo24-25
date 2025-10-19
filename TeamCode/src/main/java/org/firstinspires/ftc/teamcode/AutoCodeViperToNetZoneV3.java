@@ -33,8 +33,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 
-@TeleOp(name="Auto Viper NetZone (V2 Real)", group="")
-public class AutoCodeViperToNetZoneV2 extends LinearOpMode {
+@TeleOp(name="Auto Viper NetZone (3)", group="")
+public class AutoCodeViperToNetZoneV3 extends LinearOpMode {
 
     static final double     DRIVE_SPEED             = 0.9;
     static final double     DRIVE_INCREASED_SPEED             = 0.8;
@@ -169,7 +169,7 @@ public class AutoCodeViperToNetZoneV2 extends LinearOpMode {
                     //moving vs up
                     viperSlideManager.SetDirection(AutoDriveManager.DriveDirection.FORWARD);
                     viperSlideManager.SetPower(0.26);
-                    sleep(1100);
+                    sleep(1300);
 
                     grabberManager.OpenOrCloseGrabber(false);
 
@@ -188,16 +188,16 @@ public class AutoCodeViperToNetZoneV2 extends LinearOpMode {
 
                     viperSlideManager.SetDirection(AutoDriveManager.DriveDirection.BACKWARD);
                     viperSlideManager.SetPower(0.7);
-                    sleep(200);
+                    sleep(800);
 
                     //vs stopping for arm to go back
                     viperSlideManager.SetPower(0.0);
                     armManager.MoveArmToPosition(0.3);
-                    sleep(1);
+                    sleep(300);
 
                     //vs moving down again
-                    viperSlideManager.SetPower(0.0);
-                    sleep(1);
+                    //viperSlideManager.SetPower(0.0);
+                    //sleep(500);
 
                      
                 }
@@ -342,16 +342,16 @@ public class AutoCodeViperToNetZoneV2 extends LinearOpMode {
         //vs coming down for short time
         viperSlideManager.SetDirection(AutoDriveManager.DriveDirection.BACKWARD);
         viperSlideManager.SetPower(0.7);
-        sleep(200);
+        sleep(800);
 
         //vs stopping for arm to go back
         viperSlideManager.SetPower(0.0);
         armManager.MoveArmToPosition(0.3);
-        sleep(1);
+        sleep(100);
 
         //vs moving down again
-        viperSlideManager.SetPower(0.0);
-        sleep(1);
+        //viperSlideManager.SetPower(0.0);
+         //sleep(200);
 
     }
 

@@ -38,7 +38,7 @@ import android.view.View;
 
 public class RobotHardware {
 
-    public static enum MotorDirection {
+    public static enum LauncherDirection {
         FORWARD,
         BACKWARD
     }
@@ -53,8 +53,15 @@ public class RobotHardware {
     private DcMotor rbMotor;
     private DcMotor lfMotor;
     private DcMotor lbMotor;
+
+    private DcMotor motorl1;
+    private DcMotor motorl2;
+
+    /*
     private DcMotor viperSlideMotor;
     private DcMotor viperSlideMotorTwo;
+    */
+
    // private DcMotor armMotor;
     private double ticksPerRotationOfLeft;
     private double ticksPerRotationOfRight;
@@ -113,11 +120,14 @@ public class RobotHardware {
         lfMotor = myOpMode.hardwareMap.get(DcMotor.class, "motorLF");
         lbMotor = myOpMode.hardwareMap.get(DcMotor.class, "motorLB");
 
+        motorl1 = myOpMode.hardwareMap.get(DcMotor.class, "motorl1");
+        motorl2 = myOpMode.hardwareMap.get(DcMotor.class, "motorl2");
         //setViperSlideMotorMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
        // armMotor = myOpMode.hardwareMap.get(DcMotor.class,"motorArm");
 
-        viperSlideMotor = myOpMode.hardwareMap.get(DcMotor.class, "motorvs");
-        viperSlideMotorTwo = myOpMode.hardwareMap.get(DcMotor.class,"motorvstwo");
+        //viperSlideMotor = myOpMode.hardwareMap.get(DcMotor.class, "motorvs");
+        //viperSlideMotorTwo = myOpMode.hardwareMap.get(DcMotor.class,"motorvstwo");
+
         grabberServo = myOpMode.hardwareMap.get(Servo.class, "gripperservo");
         armServo = myOpMode.hardwareMap.get(Servo.class, "armServo");
         armServoTwo = myOpMode.hardwareMap.get(Servo.class, "armServoTwo");
@@ -126,7 +136,8 @@ public class RobotHardware {
         //armServoTwo.setPosition(0);
         //armServo.resetDeviceConfigurationForOpMode();
         //armServoTwo.resetDeviceConfigurationForOpMode();
-        setViperSlideMotorMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        //setViperSlideMotorMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
 
@@ -169,7 +180,8 @@ public class RobotHardware {
         rbMotor.setMode(MotorRunMode);
         lfMotor.setMode(MotorRunMode);
         lbMotor.setMode(MotorRunMode);
-
+        motorl1.setMode(MotorRunMode);
+        motorl2.setMode(MotorRunMode);
     }
 
     public int getLeftMotorCurrentPosition(){
@@ -205,7 +217,7 @@ public class RobotHardware {
         return rfMotor.isBusy();
     }
 
-    public void setMotorDirection(MotorDirection direction){
+   /* public void setMotorDirection(MotorDirection direction){
         if (direction == MotorDirection.BACKWARD)
         {
             lfMotor.setDirection(DcMotor.Direction.FORWARD);
@@ -220,16 +232,34 @@ public class RobotHardware {
             rfMotor.setDirection(DcMotor.Direction.FORWARD);
             rbMotor.setDirection(DcMotor.Direction.FORWARD);
         }
+    } */
+
+
+    public void setLauncherDirection(LauncherDirection direction){
+        if (direction == LauncherDirection.FORWARD){
+            motorl1.setDirection(DcMotor.Direction.FORWARD);
+            motorl2.setDirection(DcMotor.Direction.FORWARD);
+        }
+        else{
+            motorl1.setDirection(DcMotor.Direction.REVERSE);
+            motorl2.setDirection(DcMotor.Direction.REVERSE);
+        }
     }
+
+
+
+    /*
     public void setViperSlideDirectionForward(){
         viperSlideMotor.setDirection(DcMotor.Direction.FORWARD);
         viperSlideMotorTwo.setDirection(DcMotor.Direction.REVERSE);}
     public void setViperSlideDirectionReverse(){
         viperSlideMotor.setDirection(DcMotor.Direction.REVERSE);
         viperSlideMotorTwo.setDirection(DcMotor.Direction.FORWARD);}
-    public void reverseMotors(){
-        setMotorDirection(MotorDirection.BACKWARD);
-    }
+
+     */
+   // public void reverseMotors(){
+      //  setMotorDirection(MotorDirection.BACKWARD);
+   //}
 
 
     /**
@@ -274,6 +304,11 @@ public class RobotHardware {
         lbMotor.setPower(leftWheel);
     }
 
+    public void setLauncherPower(double wheelspeed) {
+        motorl1.setPower(wheelspeed);
+        motorl2.setPower(-wheelspeed);
+    }
+
     public void goDiagonal(double num){
         //rfMotor.setPower(-num);
         rbMotor.setPower(num);
@@ -288,6 +323,7 @@ public class RobotHardware {
         lfMotor.setPower(num);
     }
 
+    /*
     public void setViperSlideMotorMode (DcMotor.RunMode mode){
         viperSlideMotor.setMode(mode);
         viperSlideMotorTwo.setMode(mode);
@@ -304,6 +340,8 @@ public class RobotHardware {
         viperSlideMotorTwo.setPower(power);
 
     }
+
+     */
 
     public void moveGrabber(boolean closeGrabber){
         if (closeGrabber && grabberDrive > GRABBER_MIN) grabberDrive -= GRABBER_SPEED;

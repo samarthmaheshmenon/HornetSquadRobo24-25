@@ -33,7 +33,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 
-@TeleOp(name="Auto Viper ObsZone (1)", group="")
+@TeleOp(name="Auto Viper ObsZone (V2 Real)", group="")
 public class AutoCodeViperToObservationZoneV2 extends LinearOpMode {
 
     static final double     DRIVE_SPEED             = 0.7;
@@ -227,16 +227,16 @@ public class AutoCodeViperToObservationZoneV2 extends LinearOpMode {
         //vs coming down for short time
         viperSlideManager.SetDirection(AutoDriveManager.DriveDirection.BACKWARD);
         viperSlideManager.SetPower(0.95);
-        sleep(800);
+        sleep(200);
 
         //vs stopping for arm to go back
         viperSlideManager.SetPower(0.0);
         armManager.MoveArmToPosition(0.3);
-        sleep(200);
+        sleep(1);
 
         //vs moving down again
         viperSlideManager.SetPower(0.0);
-        sleep(200);
+        sleep(1);
     }
 
     private void dropSpecimenInBottomRail()
@@ -315,16 +315,16 @@ public class AutoCodeViperToObservationZoneV2 extends LinearOpMode {
         //vs coming down for short time
         viperSlideManager.SetDirection(AutoDriveManager.DriveDirection.BACKWARD);
         viperSlideManager.SetPower(0.95);
-        sleep(800);
+        sleep(200);
 
         //vs stopping for arm to go back
         viperSlideManager.SetPower(0.0);
         armManager.MoveArmToPosition(0.3);
-        sleep(200);
+        sleep(1);
 
         //vs moving down again
         viperSlideManager.SetPower(0.0);
-        sleep(200);
+        sleep(1);
 
     }
 }

@@ -32,26 +32,31 @@ public class Manual  extends LinearOpMode{
             manageDriveMotors();
             manageGrabber();
             manageArm();
+            manageLauncher();
 
 
             telemetryAprilTag();
 
-            robot.setViperSlideMotorTargetPosition();
-            robot.setViperSlideMotorMode(DcMotor.RunMode.RUN_TO_POSITION);
+            //robot.setViperSlideMotorTargetPosition();
+            //robot.setViperSlideMotorMode(DcMotor.RunMode.RUN_TO_POSITION);
+            /*
             if(gamepad1.left_stick_y > 0){
-
-                robot.setViperSlideDirectionForward();
+                robot.setLauncherDirection(RobotHardware.LauncherDirection.FORWARD);
+                //robot.setViperSlideDirectionForward();
                 telemetry.addData("Status", "Left Joystick Moved up");
-                robot.setViperSlideMotorPower(0.5);
+                //robot.setViperSlideMotorPower(0.5);
             }
             if(gamepad1.left_stick_y < 0){
-                robot.setViperSlideDirectionReverse();
+                robot.setLauncherDirection(RobotHardware.LauncherDirection.BACKWARD);
+                //robot.setViperSlideDirectionReverse();
                 telemetry.addData("Status", "Left Joystick Moved down");
-                robot.setViperSlideMotorPower(0.5);
+                //robot.setViperSlideMotorPower(0.5);
             }
 
+             */
+
             if(gamepad1.left_stick_y==0){
-                robot.setViperSlideMotorPower(0);
+                //robot.setViperSlideMotorPower(0);
             }
             //below is the arm
            /* if(gamepad1.right_stick_y > 0){
@@ -117,6 +122,17 @@ public class Manual  extends LinearOpMode{
         telemetry.addData("Drive Power", "%.2f", drive);
         telemetry.addData("Turn Power",  "%.2f", turn);
         telemetry.update();
+    }
+
+    private void manageLauncher(){
+        double drive        = 0;
+
+        // Run wheels in POV mode (note: The joystick goes negative when pushed forward, so negate it)
+        // In this mode the Left stick moves the robot fwd and back, the Right stick turns left and right.
+        // This way it's also easy to just drive straight, or just turn.
+        drive = gamepad1.right_stick_y;
+        // Combine drive and turn for blended motion. Use RobotHardware class
+        robot.setLauncherPower(drive);
     }
 
     private void manageGrabber(){
